@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Happy Birthday Celebration!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Orbitron', monospace;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e);
+            min-height: 100vh;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        .slide {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .active {
+            opacity: 1;
+            z-index: 10;
+        }
+
+        /* SLIDE 1: Digital Jungle Countdown */
+        #slide1 {
+            background: radial-gradient(circle at center, #0a2e0a, #001100);
+        }
+
+        .jungle-vines {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, transparent 98%, #00ff88 100%),
+                linear-gradient(45deg, transparent 98%, #00ff88 100%),
+                linear-gradient(-45deg, transparent 98%, #00ff88 100%);
+            background-size: 100px 100px, 150px 150px, 120px 120px;
+            opacity: 0.3;
+        }
+
+        .countdown {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 8rem;
+            text-shadow: 
+                0 0 20px currentColor,
+                0 0 40px currentColor,
+                0 0 60px currentColor;
+            animation: junglePulse 0.6s infinite;
+            z-index: 20;
+            transition: all 0.3s ease;
+        }
+
+        /* Color states for each number */
+        .countdown.three { color: #ff00ff; } /* Magenta */
+        .countdown.two { color: #00ccff; }   /* Cyan */
+        .countdown.one { color: #00ff88; }   /* Green */
+        .countdown.zero { color: #ffff00; }  /* Yellow */
+
+        .digital-leaves {
+            position: absolute;
+            font-size: 2rem;
+            color: #00ff88;
+            animation: leafFall linear forwards;
+            opacity: 0.7;
+        }
+
+        /* SLIDE 2: Birthday Bloom */
+        #slide2 {
+            background: radial-gradient(circle, #2a0a4a, #0a0a2a);
+        }
+
+        .flower-burst {
+            font-size: 6rem;
+            text-align: center;
+            opacity: 0;
+            transform: scale(0) rotate(0deg);
+        }
+
+        .bloomed {
+            animation: flowerBloom 2s ease-out forwards;
+        }
+
+        .petal {
+            position: absolute;
+            font-size: 2rem;
+            animation: petalFloat linear forwards;
+            opacity: 0;
+        }
+
+        /* SLIDE 3: Neon Oasis */
+        #slide3 {
+            background: linear-gradient(45deg, #0a2e2a, #1a2e4a, #2a1a4a);
+        }
+
+        .oasis-container {
+            text-align: center;
+            padding: 3rem;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            border: 2px solid #00ff88;
+            box-shadow: 
+                0 0 50px rgba(0, 255, 136, 0.3),
+                inset 0 0 50px rgba(0, 255, 136, 0.1);
+            backdrop-filter: blur(10px);
+            max-width: 600px;
+        }
+
+        .oasis-title {
+            font-size: 3rem;
+            background: linear-gradient(45deg, #00ff88, #00ccff, #ff00ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .birthday-hero {
+            font-size: 2.5rem;
+            color: #ff00ff;
+            margin: 1.5rem 0;
+            text-shadow: 0 0 15px rgba(255, 0, 255, 0.7);
+        }
+
+        .oasis-message {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #00ccff;
+            margin: 1.5rem 0;
+        }
+
+        .celebration-icons {
+            font-size: 3rem;
+            margin: 1rem;
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+
+        .date-celebration {
+            font-size: 1.5rem;
+            color: #00ff88;
+            margin: 1rem 0;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+
+        .restart-btn {
+            background: transparent;
+            color: #00ff88;
+            border: 2px solid #00ff88;
+            padding: 12px 30px;
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+            margin-top: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+
+        .restart-btn:hover {
+            background: rgba(0, 255, 136, 0.2);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+
+        /* Animations */
+        @keyframes junglePulse {
+            0%, 100% { 
+                text-shadow: 
+                    0 0 20px currentColor,
+                    0 0 40px currentColor;
+                transform: scale(1);
+            }
+            50% { 
+                text-shadow: 
+                    0 0 30px currentColor,
+                    0 0 60px currentColor,
+                    0 0 90px currentColor;
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes leafFall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes flowerBloom {
+            0% {
+                opacity: 0;
+                transform: scale(0) rotate(-180deg);
+            }
+            70% {
+                opacity: 1;
+                transform: scale(1.2) rotate(20deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        @keyframes petalFloat {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty)) rotate(360deg);
+            }
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .fireflies {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #00ff88;
+            border-radius: 50%;
+            animation: fireflyFly linear forwards;
+            box-shadow: 0 0 10px #00ff88;
+        }
+
+        @keyframes fireflyFly {
+            to {
+                transform: translate(var(--x), var(--y));
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- SLIDE 1: Jungle Countdown -->
+    <div class="slide active" id="slide1">
+        <div class="jungle-vines"></div>
+        <div class="countdown three" id="countdown">3</div>
+    </div>
+
+    <!-- SLIDE 2: Birthday Bloom -->
+    <div class="slide" id="slide2">
+        <div class="flower-burst" id="birthdayFlower">🌸 HAPPY BIRTHDAY! 🌸</div>
+    </div>
+
+    <!-- SLIDE 3: Neon Oasis -->
+    <div class="slide" id="slide3">
+        <div class="oasis-container">
+            <div class="oasis-title">BIRTHDAY ROYALTY</div>
+            <div class="birthday-hero">To Our Special Star ✨</div>
+            <div class="oasis-message">
+                In the garden of life, you bloom with extraordinary beauty.<br>
+                Your light shines brighter than the digital fireflies.<br>
+                The world celebrates the amazing person you are!
+            </div>
+            <div class="celebration-icons">🎂🎉🎁🥳🌟</div>
+            <div class="date-celebration">
+                Celebrating You Today!
+            </div>
+            <div class="oasis-message">
+                May your day be filled with joy, laughter,<br>
+                and moments as wonderful as you are.
+            </div>
+            <button class="restart-btn" onclick="restartExperience()">Watch Again</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+
+        // Create falling leaves
+        function createLeaves() {
+            const leaves = ['🍃', '🌿', '🍂', '🎋'];
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const leaf = document.createElement('div');
+                    leaf.className = 'digital-leaves';
+                    leaf.textContent = leaves[Math.floor(Math.random() * leaves.length)];
+                    leaf.style.left = Math.random() * 100 + 'vw';
+                    leaf.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    leaf.style.fontSize = (Math.random() * 1 + 1.5) + 'rem';
+                    
+                    document.getElementById('slide1').appendChild(leaf);
+                    
+                    setTimeout(() => leaf.remove(), 5000);
+                }, i * 300);
+            }
+        }
+
+        // Create fireflies
+        function createFireflies() {
+            for (let i = 0; i < 30; i++) {
+                const firefly = document.createElement('div');
+                firefly.className = 'fireflies';
+                firefly.style.left = Math.random() * 100 + 'vw';
+                firefly.style.top = Math.random() * 100 + 'vh';
+                firefly.style.setProperty('--x', (Math.random() * 200 - 100) + 'px');
+                firefly.style.setProperty('--y', (Math.random() * 200 - 100) + 'px');
+                firefly.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                firefly.style.animationDelay = Math.random() * 5 + 's';
+                
+                document.getElementById('slide3').appendChild(firefly);
+                
+                setTimeout(() => firefly.remove(), 7000);
+            }
+        }
+
+        // Create flower petals
+        function createPetals() {
+            const petals = ['🌸', '💮', '🏵️', '🌹', '🌺'];
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const petal = document.createElement('div');
+                    petal.className = 'petal';
+                    petal.textContent = petals[Math.floor(Math.random() * petals.length)];
+                    petal.style.left = '50%';
+                    petal.style.top = '50%';
+                    petal.style.setProperty('--tx', (Math.random() * 400 - 200) + 'px');
+                    petal.style.setProperty('--ty', (Math.random() * 400 - 200) + 'px');
+                    petal.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                    petal.style.fontSize = (Math.random() * 1 + 1.5) + 'rem';
+                    
+                    document.getElementById('slide2').appendChild(petal);
+                    
+                    setTimeout(() => petal.remove(), 3000);
+                }, i * 100);
+            }
+        }
+
+        // Slide navigation
+        function nextSlide() {
+            document.getElementById('slide' + currentSlide).classList.remove('active');
+            currentSlide++;
+            
+            if (currentSlide <= 3) {
+                setTimeout(() => {
+                    document.getElementById('slide' + currentSlide).classList.add('active');
+                    
+                    if (currentSlide === 2) {
+                        // Trigger flower bloom
+                        document.getElementById('birthdayFlower').classList.add('bloomed');
+                        createPetals();
+                        setTimeout(nextSlide, 3000);
+                    }
+                    
+                    if (currentSlide === 3) {
+                        // Start fireflies in oasis
+                        setInterval(createFireflies, 2000);
+                    }
+                }, 1000);
+            }
+        }
+
+        // Countdown function with color changes
+        function startCountdown() {
+            const countdownEl = document.getElementById('countdown');
+            let count = 3;
+            
+            // Set initial color class
+            countdownEl.className = 'countdown three';
+            
+            const countdownInterval = setInterval(() => {
+                countdownEl.textContent = count;
+                countdownEl.style.transform = 'scale(1.2)';
+                
+                // Change color for each number
+                countdownEl.className = 'countdown ';
+                if (count === 3) countdownEl.classList.add('three');
+                if (count === 2) countdownEl.classList.add('two');
+                if (count === 1) countdownEl.classList.add('one');
+                if (count === 0) countdownEl.classList.add('zero');
+                
+                setTimeout(() => countdownEl.style.transform = 'scale(1)', 200);
+                
+                if (count === 0) {
+                    clearInterval(countdownInterval);
+                    countdownEl.textContent = 'GO!';
+                    setTimeout(nextSlide, 800);
+                }
+                count--;
+            }, 1000);
+        }
+
+        // Restart experience
+        function restartExperience() {
+            currentSlide = 1;
+            document.getElementById('slide3').classList.remove('active');
+            document.getElementById('slide2').classList.remove('active');
+            document.getElementById('birthdayFlower').classList.remove('bloomed');
+            document.getElementById('slide1').classList.add('active');
+            
+            // Restart countdown
+            setTimeout(startCountdown, 1000);
+        }
+
+        // Initialize
+        createLeaves();
+        setTimeout(startCountdown, 1000);
+        
+        // Continuous effects
+        setInterval(createLeaves, 4000);
+        setInterval(createFireflies, 3000);
+    </script>
+</body>
+</html>
